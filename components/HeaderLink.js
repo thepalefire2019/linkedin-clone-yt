@@ -1,6 +1,7 @@
 import { signOut } from 'next-auth/react'
 import { useSession } from "next-auth/react";
-function HeaderLink({Icon, text, avatar, feed, active, hidden}) {
+import Link from 'next/link';
+function HeaderLink({Icon, text, avatar, feed, active, hidden, href}) {
     const { data: session } = useSession();
     return (
         <div
@@ -17,7 +18,10 @@ function HeaderLink({Icon, text, avatar, feed, active, hidden}) {
                 avatar?(
                     <Icon className="!h-7 !w-7 lg:!-mb-1" src={session?.user?.image} />
                 ):(
-                    <Icon />
+                    <Link href={href}>
+                        <a><Icon /></a>
+                    </Link>
+                    
                 )
             }
             <h4
